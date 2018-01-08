@@ -1,3 +1,4 @@
+from . import utilities as utils
 
 class ScheduleMixin():
     _callback = {}
@@ -39,6 +40,18 @@ class DestroyMixin():
         self.tk.destroy()
 
 class EnableMixin():    
+    @property
+    def enabled(self):
+        button_state = self.tk.cget("state")
+        return button_state == "normal" or button_state == "active"
+
+    @enabled.setter
+    def enabled(self, value):
+        if value:
+            self.enable()
+        else:
+            self.disable()
+    
     def disable(self):
         """Disable the widget."""
         self.tk.configure(state="disabled")
@@ -53,28 +66,30 @@ class FocusMixin():
         self.tk.focus_set()
 
 class DisplayMixin():
-    _display_cache = {}
 
-    def _get_display_type(self):
-        if not self.tk.grid_info():
-            return "pack"
-        return "grid"
+    @property
+    def visible(self):
+        return self._visible
+    
+    @visible.setter
+    def visible(self, value):
+        if value:
+            self.show()
+        else:
+            self.hide()
 
     def hide(self):
         """Hide the widget."""
-        display_type = self._get_display_type()
-        if display_type == "pack":
-            self.tk.pack_forget()
-        else:
+        if self.master.layout == "grid":
             self.tk.grid_forget()
+        else:
+            self.tk.pack_forget()
+        self._visible = False
 
     def show(self):
         """Show the widget."""
-        display_type = self._get_display_type()
-        if display_type == "pack":
-            self.tk.pack(**self._display_cache)
-        else:
-            self.tk.grid(**self._display_cache)
+        utils.auto_pack(self, self.master, self.grid, self.align)
+        self._visible = True
 
 class SizeMixin():
     @property

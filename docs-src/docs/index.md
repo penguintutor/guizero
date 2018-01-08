@@ -2,11 +2,13 @@
 
 guizero is designed to allow children to quickly and easily create GUIs for their programs.
 
-If you can download and unzip a file, you can use guizero - **no special permissions or administrator rights are required**.
+If you can download and unzip a file, you can [install guizero](#easy-installation) - **no special permissions or administrator rights are required**.
+
+If you have administrator rights and are connected to the internet, you can use [pip to quickly install guizero](#install-using-pip).
 
 guizero only requires `tkinter` to be installed, which is included with a standard Python installation on all platforms except Linux.
 
-## Easy installation - all platforms
+## Easy installation
 
 1. Go to the [Github repo](https://github.com/lawsie/guizero) for guizero
 
@@ -22,9 +24,7 @@ guizero only requires `tkinter` to be installed, which is included with a standa
 
 5. That's it! When you write your guizero code, make sure you save it into your home directory.
 
-## Other installation methods
-
-If you have administrator rights and are connected to the internet, you can use pip to quickly install guizero.
+## Install using pip
 
 ### Windows
 
@@ -50,4 +50,4 @@ If you have administrator rights and are connected to the internet, you can use 
 
 1. Open a terminal
 2. Install `tkinter` using your distribution's package manager, e.g. `sudo apt install python3-tk`
-3. Install guizero using pip by typing `sudo pip3 install guizero`
+3. Install guizero using pip by typing `pip3 install guizero` or `sudo pip3 install guizero` if you dont have superuser rights
